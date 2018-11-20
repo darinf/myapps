@@ -9,5 +9,9 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
   "manifest_version": 2
 }
