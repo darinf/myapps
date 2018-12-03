@@ -17,16 +17,18 @@ function SyncState() {
 function UpdateApps(tabId, tab) {
   console.log(tab.windowId + "/" + tabId + " has URL: " + tab.url);
 
+  var url = new URL(tab.url).origin;
+
   var i = 0;
   for (; i < apps.length; ++i) {
-    if (apps[i].url == tab.url) {
+    if (apps[i].url == url) {
       apps[i].count++;
       break;
     }
   }
 
   if (i == apps.length)
-    apps.push({url: tab.url, count: 1});
+    apps.push({url: url, count: 1});
 
   SyncState();
 }
