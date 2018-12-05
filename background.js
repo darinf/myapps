@@ -1,4 +1,4 @@
-var apps = [];  // list of { url: "...", count: N }
+var apps = [];  // list of { url: "...", icon: "...", count: N }
 var appsInitialized = false;
 
 var syncing = false;
@@ -7,7 +7,7 @@ function SyncState() {
     return;
   syncing = true;
   setTimeout(function() {
-    chrome.storage.sync.set({apps: apps}, function() {
+    chrome.storage.local.set({apps: apps}, function() {
       console.log("Sync'd");
       syncing = false;
     });
@@ -22,18 +22,20 @@ function UpdateApps(tabId, tab) {
   var i = 0;
   for (; i < apps.length; ++i) {
     if (apps[i].url == url) {
+      if (!apps[i].icon)
+        apps[i].icon = tab.favIconUrl;
       apps[i].count++;
       break;
     }
   }
 
   if (i == apps.length)
-    apps.push({url: url, count: 1});
+    apps.push({url: url, icon: tab.favIconUrl, count: 1});
 
   SyncState();
 }
 
-chrome.storage.sync.get(['apps'], function(result) {
+chrome.storage.local.get(['apps'], function(result) {
   console.log("Got apps");
   if (result.apps)
     apps = result.apps;

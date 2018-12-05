@@ -1,0 +1,23 @@
+div {
+  font-size: 10pt;
+}
+
+div {
+  white-space: nowrap;
+  margin-top: .5em;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+  padding-right: .3em;
+}

@@ -22,9 +22,14 @@ function RenderAppList(appList) {
 
   for (var app of appList) {
     var div = document.createElement("DIV");
-    div.innerText = app.url + " (" + app.count + ")";
+    div.innerHTML = "<img src='" + app.icon + "'><a>" + app.url + "</a> (" + app.count + ")";
+    div.onclick = OnClick;
     container.appendChild(div);
   }
+}
+
+function OnClick() {
+  console.log("OnClick");
 }
 
 window.onload = function() {
